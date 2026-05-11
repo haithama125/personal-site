@@ -42,7 +42,9 @@ Verify it worked:
 brew --version
 ```
 You should see something like `Homebrew 4.x.x`.
+ 
 
+#I AM HERE
 ### 1.3 Install Git and Node.js
 
 ```
@@ -63,8 +65,8 @@ All three should print version numbers. If any say "command not found," close Te
 Git stamps every change you make with your name and email. Run these (replace the placeholders with your real info — use the email tied to your GitHub account):
 
 ```
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
+git config --global user.name "haithama125"
+git config --global user.email "haithama125@gmail.com"
 git config --global init.defaultBranch main
 ```
 
@@ -201,7 +203,7 @@ Follow the prompts: choose **GitHub.com**, **HTTPS**, **Yes** to authenticate Gi
 Now run those three commands GitHub gave you (paste them into your VS Code terminal, replacing `yourname` with your actual GitHub username):
 
 ```
-git remote add origin https://github.com/yourname/personal-site.git
+git remote add origin https://github.com/haithama125/personal-site.git
 git branch -M main
 git push -u origin main
 ```

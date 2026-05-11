@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<!--
+  data-theme="dark" is the starting state.
+  The JavaScript at the bottom reads localStorage and may switch it to "light"
+  before anything paints, so the user never sees a flash of the wrong theme.
+-->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haitham — Home</title>
+
+  <!-- Google Fonts: Fraunces (headings, italic) + Nunito (body) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400;1,700&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =====================================================================
+       1. DESIGN TOKENS — CSS custom properties (variables)
+       =====================================================================
+       Custom properties start with --. You set them once here and reference
+       them anywhere else with var(--name). Changing a variable updates every
+       place that uses it instantly. */
+
+    :root {
+      /* Raw palette — never changes */
+      --dust-grey:    #dad7cd;
+      --dry-sage:     #a3b18a;
+      --fern:         #588157;
+      --hunter-green: #3a5a40;
+      --pine-teal:    #344e41;
+      --deep-pine:    #1e3028;
+    }
+
+    /* Dark theme — applied when <html data-theme="dark"> */
+    [data-theme="dark"] {
+      --bg:           var(--deep-pine);
+      --text:         var(--dust-grey);
+      --accent:       var(--dry-sage);
+      --nav-bg:       var(--pine-teal);
+      --card-bg:      var(--pine-teal);
+      --card-border:  var(--hunter-green);
+      --muted:        var(--dry-sage);
+    }
+
+    /* Light theme — applied when <html data-theme="light"> */
+    [data-theme="light"] {
+      --bg:           var(--dust-grey);
+      --text:         var(--hunter-green);
+      --accent:       var(--fern);
+      --nav-bg:       #c8c5bb;
+      --card-bg:      #ccc9bf;
+      --card-border:  var(--fern);
+      --muted:        var(--hunter-green);
+    }
+
+    /* =====================================================================
+       2. RESET + BASE STYLES
+       ===================================================================== */
+
+    /* box-sizing: border-box makes width/height calculations include padding
+       and border, which is almost always what you want. */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      /* transition smooths the color change when toggling themes */
+      transition: background-color 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+
+    /* Headings use Fraunces in italic — applies everywhere automatically */
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    /* =====================================================================
+       3. NAV BAR
+       ===================================================================== */
+
+    nav {
+      background-color: var(--nav-bg);
+      /* sticky + top:0 keeps the nav pinned to the top as you scroll */
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      border-bottom: 1px solid var(--card-border);
+      transition: background-color 0.3s;
+    }
+
+    .nav-links {
+      list-style: none; /* removes the bullet points from <ul> */
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      padding-bottom: 3px;
+      /* invisible bottom border — becomes visible on hover/active */
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    /* .active class is added on the link that matches the current page */
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      text-decoration: none;
+    }
+
+    #theme-toggle {
+      background: none;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    #theme-toggle:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* =====================================================================
+       4. PAGE LAYOUT
+       ===================================================================== */
+
+    /* max-width + auto margins = centered column */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    section {
+      margin-bottom: 5rem;
+    }
+
+    /* Small uppercase label above each section */
+    .section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    /* =====================================================================
+       5. INTRO SECTION
+       ===================================================================== */
+
+    .intro h1 {
+      /* clamp(min, preferred, max) — font scales with viewport width */
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 580px;
+      opacity: 0.85;
+      margin-bottom: 1.75rem;
+    }
+
+    .intro-link {
+      display: inline-block;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .intro-link:hover {
+      background-color: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+    }
+
+    /* =====================================================================
+       6. MARQUEE / TICKER STRIP
+       ===================================================================== */
+
+    /* The wrapper breaks out of the max-width container to span the full
+       viewport width. The calc trick: we're inside a centered column, so we
+       shift left by half the viewport minus half the column, then set width
+       to 100vw. */
+    .marquee-wrapper {
+      overflow: hidden;
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 0;
+      margin-left:  calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      width: 100vw;
+      /* sits between intro and projects, not inside a <section> */
+      margin-bottom: 4rem;
+    }
+
+    /* The track moves left continuously */
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 35s linear infinite;
+    }
+
+    /* Hovering pauses the animation */
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Each individual fact/item */
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .marquee-dot {
+      width: 5px;
+      height: 5px;
+      background-color: var(--fern);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* translateX(-50%) moves the track left by exactly one full copy of the
+       list. Because the HTML is duplicated, the second copy seamlessly takes
+       over, creating an infinite loop. */
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* =====================================================================
+       7. PROJECTS GRID
+       ===================================================================== */
+
+    /* auto-fill + minmax: creates as many columns as fit, each at least 260px */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card h3 a {
+      color: var(--text);
+    }
+
+    .project-card h3 a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    /* Pill tags for tech used */
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: var(--hunter-green);
+      color: var(--dust-grey);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    [data-theme="light"] .tag {
+      background-color: var(--fern);
+      color: #fff;
+    }
+
+    /* =====================================================================
+       8. PHOTO GALLERY (masonry via CSS columns)
+       ===================================================================== */
+
+    /* `columns` splits children into multiple columns like a newspaper.
+       Images of different heights naturally stack without gaps — that's the
+       masonry effect. We don't need JavaScript for this. */
+    .gallery-grid {
+      columns: 3 200px; /* up to 3 columns, each at least 200px wide */
+      gap: 1rem;
+    }
+
+    /* break-inside: avoid stops a card from being split across columns */
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--card-bg);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block; /* removes the small gap beneath inline images */
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================================================================
+       NAV — same structure on every page; only change the .active class
+       =================================================================== -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html"  class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gear.html">Gear</a></li>
+      <li><a href="travel.html">Travel</a></li>
+    </ul>
+    <button id="theme-toggle" aria-label="Toggle colour theme">☀ Light</button>
+  </nav>
+
+
+  <!-- ===================================================================
+       TICKER — lives outside <main> so it can stretch edge-to-edge
+       =================================================================== -->
+  <div class="marquee-wrapper">
+    <div class="marquee-track" id="marquee-track">
+      <!-- Items are injected by JavaScript below so we can easily edit them
+           in one place. JS also duplicates the list for seamless looping. -->
+    </div>
+  </div>
+
+
+  <!-- ===================================================================
+       MAIN CONTENT
+       =================================================================== -->
+  <main>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <p class="section-label">Welcome</p>
+      <h1>Hey, I'm<br>Haitham.</h1>
+      <p>
+        I'm a [your title / description] based in [your city].
+        I care about [things you care about] — and this is my little
+        corner of the internet.
+      </p>
+      <a href="about.html" class="intro-link">More about me →</a>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section>
+      <p class="section-label">Projects</p>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <h3><a href="#">Project One</a></h3>
+          <p>A short description of what this project does and why you built it.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3><a href="#">Project Two</a></h3>
+          <p>A short description of what this project does and why you built it.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3><a href="#">Project Three</a></h3>
+          <p>A short description of what this project does and why you built it.</p>
+          <div class="project-tags">
+            <span class="tag">Design</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h3><a href="#">Project Four</a></h3>
+          <p>A short description of what this project does and why you built it.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">API</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- GALLERY -->
+    <section>
+      <p class="section-label">Photos</p>
+      <!-- Picsum gives random placeholder photos. The seed= keeps them
+           consistent — same seed always returns the same image. -->
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g1/600/750" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g2/600/400" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g3/600/680" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g4/600/450" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g5/600/820" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g6/600/370" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g7/600/560" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/seed/g8/600/490" alt="Photo" loading="lazy"></div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <script>
+    // =======================================================================
+    // THEME — runs first so there's never a flash of the wrong colours
+    // =======================================================================
+
+    // Read whatever the user last chose. If nothing saved yet, use 'dark'.
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      // Read the current value from the <html> element
+      const current = document.documentElement.getAttribute('data-theme');
+      // Flip it
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      // Save the choice so it persists when the user comes back
+      localStorage.setItem('theme', next);
+    });
+
+    function applyTheme(theme) {
+      // Setting an attribute on the root <html> element activates the right
+      // CSS block ([data-theme="dark"] or [data-theme="light"])
+      document.documentElement.setAttribute('data-theme', theme);
+      // Update the button label to show what clicking will switch TO
+      document.getElementById('theme-toggle').textContent =
+        theme === 'dark' ? '☀ Light' : '☾ Dark';
+    }
+
+
+    // =======================================================================
+    // TICKER — edit this array to change your scrolling facts
+    // =======================================================================
+
+    const facts = [
+      'Building this site with plain HTML & CSS',
+      'Based in [Your City]',
+      'Learning to code in 2025',
+      '[Your achievement here]',
+      '[A hobby or interest]',
+      'This ticker pauses on hover',
+      '[Another fun fact about you]',
+      'Open to interesting conversations',
+    ];
+
+    // Build HTML for one set of items
+    const oneSet = facts.map(function (text) {
+      return (
+        '<span class="marquee-item">' +
+          '<span class="marquee-dot"></span>' +
+          text +
+        '</span>'
+      );
+    }).join('');
+
+    // Put two identical sets inside the track.
+    // The CSS animation slides the track left by exactly 50% (one set).
+    // When it reaches 50%, it loops back to 0% — but because the second
+    // set is identical, the eye never notices the jump. Seamless loop.
+    document.getElementById('marquee-track').innerHTML = oneSet + oneSet;
+  </script>
+
+</body>
+</html>
