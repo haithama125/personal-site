@@ -124,11 +124,54 @@
       font-variation-settings: 'WONK' 0;
     }
 
+    h1, h2 {
+      letter-spacing: -0.02em;
+    }
+
     a {
       color: var(--accent);
       text-decoration: none;
     }
-    a:hover { text-decoration: underline; }
+
+    /* Animated underline for inline text links inside paragraphs in <main>.
+       - position: relative on the link lets the ::after pseudo-element
+         anchor to it absolutely.
+       - The ::after starts at width 0 and grows to 100% on hover.
+       - Scoped to `main p a` so nav links and button-styled links
+         (which aren't inside <p>) keep their own hover treatment. */
+    main p a {
+      position: relative;
+    }
+    main p a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    main p a:hover::after {
+      width: 100%;
+    }
+
+    /* Custom keyboard focus ring.
+       - :focus matches any element with focus, regardless of how it got it
+         (mouse click, tap, or keyboard). We turn its outline OFF so mouse
+         users don't see an outline after clicking a button.
+       - :focus-visible only matches when the browser thinks the user is
+         navigating with the keyboard (Tab) or another non-pointer device.
+         We give that a clear 2px accent-coloured ring with 4px of breathing
+         room (outline-offset pushes the ring away from the element edge,
+         so it doesn't crowd the content). */
+    *:focus {
+      outline: none;
+    }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
 
     /* =====================================================================
        3. NAV BAR

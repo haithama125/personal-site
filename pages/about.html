@@ -90,8 +90,39 @@
       font-variation-settings: 'WONK' 0;
     }
 
+    h1, h2 {
+      letter-spacing: -0.02em;
+    }
+
     a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+
+    /* Animated underline for inline text links inside paragraphs in <main>.
+       Scoped to `main p a` so nav and button-styled links aren't affected. */
+    main p a {
+      position: relative;
+    }
+    main p a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    main p a:hover::after {
+      width: 100%;
+    }
+
+    /* Custom keyboard focus ring. See index.html for the full explanation. */
+    *:focus {
+      outline: none;
+    }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
 
     /* =====================================================================
        3. NAV
