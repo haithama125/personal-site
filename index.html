@@ -44,6 +44,10 @@
       --card-bg:      var(--pine-teal);
       --card-border:  var(--hunter-green);
       --muted:        var(--dry-sage);
+      /* Soft shadow used in place of borders on card-like elements.
+         A black tint reads as natural depth on the dark green background. */
+      --card-shadow:       0 4px 24px rgba(0, 0, 0, 0.18);
+      --card-shadow-hover: 0 6px 28px rgba(0, 0, 0, 0.28);
     }
 
     /* Light theme — applied when <html data-theme="light"> */
@@ -55,6 +59,10 @@
       --card-bg:      #ccc9bf;
       --card-border:  var(--fern);
       --muted:        var(--hunter-green);
+      /* Same shadow shape, but tinted hunter-green (58, 90, 64) — a pure
+         black shadow would look harsh against the soft beige background. */
+      --card-shadow:       0 4px 24px rgba(58, 90, 64, 0.12);
+      --card-shadow-hover: 0 6px 28px rgba(58, 90, 64, 0.22);
     }
 
     /* =====================================================================
@@ -76,6 +84,37 @@
       /* transition smooths the color change when toggling themes */
       transition: background-color 0.3s, color 0.3s;
       line-height: 1.6;
+    }
+
+    /* Subtle noise overlay — adds a faint film-grain texture over the
+       whole page so the flat green background doesn't look too digital.
+       - position: fixed + inset: 0 pins it to the viewport, covering
+         everything as you scroll.
+       - pointer-events: none lets clicks pass through to the content.
+       - z-index: 1 places it above the background but below page content
+         (which we lift to z-index: 2 below).
+       - The background-image is an inline SVG using <feTurbulence> to
+         generate fractal noise. stitchTiles='stitch' makes the pattern
+         tile seamlessly, and %23 is the URL-encoded '#' in url(#n). */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+      background-size: 200px 200px;
+      background-repeat: repeat;
+    }
+
+    /* Lift every direct child of <body> above the noise overlay.
+       position: relative is needed for z-index to take effect.
+       The nav keeps its existing position: sticky / z-index: 100 because
+       that rule is declared later in the stylesheet and wins the tie. */
+    body > * {
+      position: relative;
+      z-index: 2;
     }
 
     /* Headings use Fraunces in italic — applies everywhere automatically */
@@ -290,15 +329,17 @@
 
     .project-card {
       background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
+      /* Soft shadow instead of a 1px border — gives the card depth without
+         the boxed-in outline. The shadow value comes from the theme block. */
+      box-shadow: var(--card-shadow);
       border-radius: 8px;
       padding: 1.25rem 1.5rem;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .project-card:hover {
       transform: translateX(4px);
-      border-color: var(--accent);
+      box-shadow: var(--card-shadow-hover);
     }
 
     .project-card h3 {

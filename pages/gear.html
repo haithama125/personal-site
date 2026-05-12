@@ -39,6 +39,9 @@
       --card-bg:      var(--pine-teal);
       --card-border:  var(--hunter-green);
       --muted:        var(--dry-sage);
+      /* Soft shadows for card-like elements — see index.html for notes. */
+      --card-shadow:       0 4px 24px rgba(0, 0, 0, 0.18);
+      --card-shadow-hover: 0 6px 28px rgba(0, 0, 0, 0.28);
     }
 
     [data-theme="light"] {
@@ -49,6 +52,8 @@
       --card-bg:      #ccc9bf;
       --card-border:  var(--fern);
       --muted:        var(--hunter-green);
+      --card-shadow:       0 4px 24px rgba(58, 90, 64, 0.12);
+      --card-shadow-hover: 0 6px 28px rgba(58, 90, 64, 0.22);
     }
 
     /* =====================================================================
@@ -63,6 +68,26 @@
       color: var(--text);
       transition: background-color 0.3s, color 0.3s;
       line-height: 1.6;
+    }
+
+    /* Subtle noise overlay — see index.html for the full explanation.
+       Pinned to the viewport, sits above the background but below the
+       content (which we bump to z-index: 2 below). */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+      background-size: 200px 200px;
+      background-repeat: repeat;
+    }
+
+    body > * {
+      position: relative;
+      z-index: 2;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -167,15 +192,15 @@
        and an optional "why I use it" note */
     .gear-card {
       background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
       border-radius: 8px;
       padding: 1.5rem;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .gear-card:hover {
       transform: translateY(-4px);
-      border-color: var(--accent);
+      box-shadow: var(--card-shadow-hover);
     }
 
     .gear-icon {
@@ -232,13 +257,13 @@
       gap: 2rem;
       align-items: center;
       background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
       border-radius: 8px;
       padding: 1.75rem;
-      transition: border-color 0.2s;
+      transition: box-shadow 0.2s;
     }
 
-    .gear-featured:hover { border-color: var(--accent); }
+    .gear-featured:hover { box-shadow: var(--card-shadow-hover); }
 
     .gear-featured-icon {
       font-size: 3.5rem;
