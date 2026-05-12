@@ -117,7 +117,11 @@
 
     /* =====================================================================
        4. PAGE LAYOUT
-       ===================================================================== */
+       =====================================================================
+       --content-width is the shared width used by the photo AND the body
+       text below it. Change it here to update both at once. */
+
+    :root { --content-width: 720px; }
 
     main { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
 
@@ -131,16 +135,17 @@
     }
 
     /* =====================================================================
-       5. HERO — two columns: greeting text left, photo right
+       5. HERO — header on top, big photo centred below
        ===================================================================== */
 
     .hero {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 4rem;
+      gap: 2rem;
     }
 
-    .hero-text { flex: 1; }
+    .hero-text { width: 100%; max-width: var(--content-width); }
 
     .hero-text h1 {
       font-size: clamp(2.4rem, 5vw, 3.6rem);
@@ -152,57 +157,34 @@
       font-size: 1.05rem;
       line-height: 1.8;
       opacity: 0.85;
-      max-width: 400px;
     }
 
-    /* Photo column */
-    .hero-photo-col { flex-shrink: 0; text-align: center; }
+    /* Photo column — now full-width, image fills the content width */
+    .hero-photo-col {
+      width: 100%;
+      max-width: var(--content-width);
+      text-align: center;
+    }
 
     /* position: relative lets the emoji overlay sit on top of the photo */
     .profile-wrap {
       position: relative;
-      display: inline-block;
+      display: block;
+      width: 100%;
       border-radius: 14px;
       overflow: hidden;
     }
 
     .profile-photo {
       display: block;
-      width: 260px;
-      height: 320px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 14px;
       /* CSS filter changes animate smoothly with transition */
       transition: filter 0.35s ease;
     }
-
-    /* Emoji overlay — absolutely covers the photo */
-    .filter-overlay {
-      position: absolute;
-      inset: 0;
-      pointer-events: none; /* clicks still reach the image */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0.4rem 0.6rem 1.5rem;
-    }
-
-    /* Ears and nose are hidden by default; shown only for dog filter */
-    .overlay-ears {
-      display: none;
-      justify-content: space-between;
-      font-size: 3rem;
-      line-height: 1;
-    }
-
-    .overlay-nose {
-      display: none;
-      text-align: center;
-      font-size: 2.4rem;
-    }
-
-    .profile-wrap.filter-dog .overlay-ears,
-    .profile-wrap.filter-dog .overlay-nose { display: flex; }
 
     /* ---- CSS filter classes ----
        Each class applies a different filter property to the <img>.
@@ -214,24 +196,25 @@
     .filter-cool     { filter: hue-rotate(190deg) saturate(0.8) brightness(1.1); }
     .filter-warm     { filter: sepia(25%) saturate(1.8) brightness(1.08); }
     .filter-drama    { filter: contrast(1.6) saturate(1.2) brightness(0.85); }
-    .filter-dog      { filter: saturate(2) hue-rotate(25deg) brightness(1.1); }
 
-    /* Filter strip — row of pill buttons under the photo */
+    /* Filter strip — single row of equal-width buttons that together
+       span the full width of the image above it. Each button uses
+       flex: 1 so they share the row equally. */
     .filter-strip {
       margin-top: 0.9rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      justify-content: center;
-      max-width: 260px;
+      gap: 0.5rem;
+      width: 100%;
     }
 
     .filter-btn {
+      flex: 1;
       background: none;
       border: 1px solid var(--card-border);
       color: var(--text);
-      font-size: 0.78rem; font-weight: 600;
-      padding: 4px 12px; border-radius: 20px;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 10px 8px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     }
@@ -245,22 +228,20 @@
       border-color: var(--accent);
     }
 
-    /* Stack hero vertically on small screens */
-    @media (max-width: 640px) {
-      .hero { flex-direction: column-reverse; gap: 2rem; }
-      .hero-text .tagline { max-width: 100%; }
-      .profile-photo { width: 220px; height: 270px; }
-      .filter-strip { max-width: 220px; }
-    }
-
     /* =====================================================================
        6. INTRODUCTION — bio, values, goals
-       ===================================================================== */
+       =====================================================================
+       intro-body is centred and matches the photo width above it, so the
+       text column lines up visually with the image. */
+
+    .intro-body {
+      max-width: var(--content-width);
+      margin: 0 auto;
+    }
 
     .intro-body p {
       font-size: 1.05rem;
       line-height: 1.85;
-      max-width: 640px;
       opacity: 0.85;
       margin-bottom: 1.2rem;
     }
@@ -468,17 +449,17 @@
           The picsum URL is just a placeholder for now.
         -->
         <div class="profile-wrap filter-original" id="profile-wrap">
+          <!--
+            Placeholder face SVG. To use your own photo, drop a square
+            image into the /images folder (e.g. profile.jpg) and change
+            the src below to "../images/profile.jpg".
+          -->
           <img
             id="profile-img"
             class="profile-photo filter-original"
-            src="https://picsum.photos/seed/haitham/520/640"
+            src="../images/placeholder-face.svg"
             alt="Haitham"
           />
-          <!-- Emoji overlay — only visible when Dog 🐶 filter is active -->
-          <div class="filter-overlay">
-            <div class="overlay-ears">🐕&nbsp;&nbsp;&nbsp;🐕</div>
-            <div class="overlay-nose">🐽</div>
-          </div>
         </div>
 
         <!-- One button per filter. data-filter must match a CSS class above. -->
@@ -489,7 +470,6 @@
           <button class="filter-btn" data-filter="filter-cool">Cool</button>
           <button class="filter-btn" data-filter="filter-warm">Warm</button>
           <button class="filter-btn" data-filter="filter-drama">Drama</button>
-          <button class="filter-btn" data-filter="filter-dog">Dog 🐶</button>
         </div>
       </div>
 
@@ -500,8 +480,8 @@
          INTRODUCTION — who you are, values, goals
          ============================================================== -->
     <section>
-      <p class="section-label">Introduction</p>
       <div class="intro-body">
+        <p class="section-label">Introduction</p>
         <p>
           [Who you are — your background, what you've studied or worked on,
           and what drives you. Two to three sentences is enough for an opener.]
@@ -693,17 +673,14 @@
     //   1. Each button has a data-filter attribute that matches a CSS class.
     //   2. When clicked, we remove all filter classes and add the chosen one.
     //      This changes the CSS `filter:` property on the image.
-    //   3. We do the same on the .profile-wrap so the dog-ears overlay
-    //      can be shown/hidden with a simple CSS rule.
     // ===================================================================
 
-    const profileWrap = document.getElementById('profile-wrap');
-    const profileImg  = document.getElementById('profile-img');
-    const filterBtns  = document.querySelectorAll('.filter-btn');
+    const profileImg = document.getElementById('profile-img');
+    const filterBtns = document.querySelectorAll('.filter-btn');
 
     const allFilters = [
       'filter-original', 'filter-bw', 'filter-vintage',
-      'filter-cool', 'filter-warm', 'filter-drama', 'filter-dog',
+      'filter-cool', 'filter-warm', 'filter-drama',
     ];
 
     filterBtns.forEach(function (btn) {
@@ -717,10 +694,6 @@
         // Swap filter class on the image (changes the visual effect)
         allFilters.forEach(function (f) { profileImg.classList.remove(f); });
         profileImg.classList.add(chosen);
-
-        // Swap filter class on the wrapper (shows/hides dog emoji overlay)
-        allFilters.forEach(function (f) { profileWrap.classList.remove(f); });
-        profileWrap.classList.add(chosen);
       });
     });
   </script>
