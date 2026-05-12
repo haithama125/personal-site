@@ -276,32 +276,34 @@
     }
 
     /* =====================================================================
-       7. PROJECTS GRID
-       ===================================================================== */
+       7. PROJECTS LIST
+       =====================================================================
+       Each project is a wide horizontal "bar" stacked vertically.
+       grid-template-columns: 1fr means just one column — so cards take the
+       full width of the container. */
 
-    /* auto-fill + minmax: creates as many columns as fit, each at least 260px */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
     .project-card {
       background-color: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 8px;
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       transition: transform 0.2s, border-color 0.2s;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
+      transform: translateX(4px);
       border-color: var(--accent);
     }
 
     .project-card h3 {
       font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .project-card h3 a {
@@ -317,11 +319,74 @@
       font-size: 0.9rem;
       line-height: 1.65;
       opacity: 0.8;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     /* Pill tags for tech used */
     .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    /* ---------------------------------------------------------------------
+       LIVE / "Currently working on" card
+       --------------------------------------------------------------------- */
+
+    /* Lays out the dot and text in a row, vertically centered */
+    .project-card.live {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Small label before the project name, e.g. "Currently working on:" */
+    .live-label {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* The project name itself — uses the accent colour to stand out */
+    .live-project {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* The glowing green dot.
+       - background is a bright green
+       - box-shadow with a large blur creates the "glow"
+       - the `pulse` animation grows the glow rhythmically */
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      flex-shrink: 0;
+      animation: pulse 1.8s ease-out infinite;
+    }
+
+    /* The keyframes do two things at once:
+       1. Expand the box-shadow outward (the visible "ping" ring)
+       2. Fade the ring out as it expands, so it disappears at the end */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7),
+                    0 0 8px 2px rgba(34, 197, 94, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(34, 197, 94, 0),
+                    0 0 8px 2px rgba(34, 197, 94, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0),
+                    0 0 8px 2px rgba(34, 197, 94, 0.5);
+      }
+    }
+
+    /* On narrow screens, let the label wrap below the dot cleanly */
+    @media (max-width: 480px) {
+      .project-card.live { flex-wrap: wrap; }
+    }
 
     .tag {
       font-size: 0.75rem;
@@ -419,6 +484,15 @@
     <section>
       <p class="section-label">Projects</p>
       <div class="projects-grid">
+
+        <!-- Live "currently working on" card — sits at the top of the list.
+             The .live-dot is a small green circle with a pulsing glow,
+             driven entirely by CSS (see the @keyframes pulse block above). -->
+        <div class="project-card live">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span class="live-label">Currently working on:</span>
+          <span class="live-project">This personal site</span>
+        </div>
 
         <div class="project-card">
           <h3><a href="#">Project One</a></h3>
