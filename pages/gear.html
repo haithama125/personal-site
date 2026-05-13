@@ -234,10 +234,23 @@
       box-shadow: var(--card-shadow-hover);
     }
 
+    /* Icon container — now holds a product image instead of an emoji.
+       The img inside fills the box and crops nicely thanks to object-fit. */
     .gear-icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-      line-height: 1;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 0.85rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--bg);
+    }
+
+    .gear-icon img,
+    .gear-featured-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .gear-card h3 {
@@ -297,9 +310,12 @@
     .gear-featured:hover { box-shadow: var(--card-shadow-hover); }
 
     .gear-featured-icon {
-      font-size: 3.5rem;
+      width: 110px;
+      height: 110px;
       flex-shrink: 0;
-      line-height: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: var(--bg);
     }
 
     .gear-featured-body h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
@@ -351,7 +367,9 @@
 
         <!-- Featured item spans full width — good for your main machine -->
         <div class="gear-featured">
-          <div class="gear-featured-icon">💻</div>
+          <div class="gear-featured-icon">
+            <img src="../images/gear/computer.jpg" alt="My computer" />
+          </div>
           <div class="gear-featured-body">
             <h3>[Your Computer]</h3>
             <p class="gear-model">[e.g. MacBook Pro 14" M3, 2024]</p>
@@ -367,14 +385,18 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🖥️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/monitor.jpg" alt="Monitor" />
+          </div>
           <h3>[Monitor]</h3>
           <p class="gear-model">[e.g. LG 27UK850-W 4K]</p>
           <p>[Why you picked this one and what you use it for.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">⌨️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/keyboard.jpg" alt="Keyboard" />
+          </div>
           <h3>[Keyboard]</h3>
           <p class="gear-model">[e.g. Keychron Q1 Pro]</p>
           <p>[What switch, what you like about the typing feel, etc.]</p>
@@ -384,7 +406,9 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🖱️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/mouse.jpg" alt="Mouse or trackpad" />
+          </div>
           <h3>[Mouse or Trackpad]</h3>
           <p class="gear-model">[e.g. Logitech MX Master 3]</p>
           <p>[Why you prefer this over the default, what makes it worth it.]</p>
@@ -402,7 +426,9 @@
       <div class="gear-grid">
 
         <div class="gear-card">
-          <div class="gear-icon">🎧</div>
+          <div class="gear-icon">
+            <img src="../images/gear/headphones.jpg" alt="Headphones" />
+          </div>
           <h3>[Headphones]</h3>
           <p class="gear-model">[e.g. Sony WH-1000XM5]</p>
           <p>[What you use them for — music, calls, focus — and what stands out.]</p>
@@ -412,14 +438,18 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🎙️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/microphone.jpg" alt="Microphone" />
+          </div>
           <h3>[Microphone]</h3>
           <p class="gear-model">[e.g. Blue Yeti Nano]</p>
           <p>[When and why you use this — calls, recording, streaming.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🔊</div>
+          <div class="gear-icon">
+            <img src="../images/gear/speakers.jpg" alt="Speakers" />
+          </div>
           <h3>[Speakers]</h3>
           <p class="gear-model">[e.g. Audioengine A2+]</p>
           <p>[What music you listen to on them and what the sound is like.]</p>
@@ -437,7 +467,9 @@
       <div class="gear-grid">
 
         <div class="gear-featured">
-          <div class="gear-featured-icon">📷</div>
+          <div class="gear-featured-icon">
+            <img src="../images/gear/camera.jpg" alt="My camera" />
+          </div>
           <div class="gear-featured-body">
             <h3>[Your Camera]</h3>
             <p class="gear-model">[e.g. Sony A7C II]</p>
@@ -449,7 +481,9 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🔭</div>
+          <div class="gear-icon">
+            <img src="../images/gear/lens.jpg" alt="Camera lens" />
+          </div>
           <h3>[Lens]</h3>
           <p class="gear-model">[e.g. Sony 35mm f/1.8]</p>
           <p>[When you reach for it and what you love about it.]</p>
@@ -459,7 +493,9 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🎒</div>
+          <div class="gear-icon">
+            <img src="../images/gear/camera-bag.jpg" alt="Camera bag" />
+          </div>
           <h3>[Camera Bag]</h3>
           <p class="gear-model">[e.g. Peak Design Everyday Backpack]</p>
           <p>[Why this bag over everything else you tried.]</p>
@@ -477,28 +513,36 @@
       <div class="gear-grid">
 
         <div class="gear-card">
-          <div class="gear-icon">🖊️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/code-editor.jpg" alt="Code editor" />
+          </div>
           <h3>[Code Editor]</h3>
           <p class="gear-model">[e.g. VS Code]</p>
           <p>[Theme, extensions, or anything you've customised that changed how you work.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">📝</div>
+          <div class="gear-icon">
+            <img src="../images/gear/notes.jpg" alt="Notes app" />
+          </div>
           <h3>[Notes App]</h3>
           <p class="gear-model">[e.g. Obsidian]</p>
           <p>[How you organise your notes and why this app fits your brain.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🗂️</div>
+          <div class="gear-icon">
+            <img src="../images/gear/tasks.jpg" alt="Task manager" />
+          </div>
           <h3>[Task Manager]</h3>
           <p class="gear-model">[e.g. Notion / Todoist / pen + paper]</p>
           <p>[Your system for keeping track of what needs to get done.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🌐</div>
+          <div class="gear-icon">
+            <img src="../images/gear/browser.jpg" alt="Web browser" />
+          </div>
           <h3>[Browser]</h3>
           <p class="gear-model">[e.g. Arc / Firefox / Chrome]</p>
           <p>[Any extensions or habits that make your browsing setup work for you.]</p>
@@ -516,28 +560,36 @@
       <div class="gear-grid">
 
         <div class="gear-card">
-          <div class="gear-icon">🪑</div>
+          <div class="gear-icon">
+            <img src="../images/gear/chair.jpg" alt="Chair" />
+          </div>
           <h3>[Chair]</h3>
           <p class="gear-model">[e.g. Herman Miller Aeron]</p>
           <p>[Whether it was worth the price and what problem it solved.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">💡</div>
+          <div class="gear-icon">
+            <img src="../images/gear/desk-light.jpg" alt="Desk light" />
+          </div>
           <h3>[Desk Light]</h3>
           <p class="gear-model">[e.g. BenQ ScreenBar]</p>
           <p>[Why good lighting matters to you and how this fits in.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🎒</div>
+          <div class="gear-icon">
+            <img src="../images/gear/bag.jpg" alt="Bag" />
+          </div>
           <h3>[Bag]</h3>
           <p class="gear-model">[e.g. Aer Day Pack]</p>
           <p>[What you carry in it and where it goes with you.]</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">📓</div>
+          <div class="gear-icon">
+            <img src="../images/gear/notebook.jpg" alt="Notebook" />
+          </div>
           <h3>[Notebook]</h3>
           <p class="gear-model">[e.g. Leuchtturm1917 A5]</p>
           <p>[What you write in it and whether you're a grid, ruled, or dot-grid person.]</p>
@@ -558,7 +610,9 @@
       <div class="gear-grid">
 
         <div class="gear-card">
-          <div class="gear-icon">📷</div>
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-camera.jpg" alt="Wishlist camera" />
+          </div>
           <h3>[Wanted item]</h3>
           <p class="gear-model">[e.g. Fujifilm X100VI]</p>
           <p>[Why you want it and what you'd use it for.]</p>
@@ -568,7 +622,9 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">🎧</div>
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-headphones.jpg" alt="Wishlist headphones" />
+          </div>
           <h3>[Wanted item]</h3>
           <p class="gear-model">[e.g. Sennheiser HD 600]</p>
           <p>[What draws you to it.]</p>
@@ -578,7 +634,9 @@
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">⌚</div>
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-watch.jpg" alt="Wishlist watch" />
+          </div>
           <h3>[Wanted item]</h3>
           <p class="gear-model">[e.g. Seiko SPB143]</p>
           <p>[Why this one made the list.]</p>
