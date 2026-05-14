@@ -625,8 +625,6 @@
     <!-- GALLERY -->
     <section>
       <p class="section-label">Photos</p>
-      <!-- Picsum gives random placeholder photos. The seed= keeps them
-           consistent — same seed always returns the same image. -->
       <!-- This grid mixes photos and short autoplay clips. A few rules for
            the <video> entries:
            - They MUST have the `muted` attribute — browsers block autoplay
@@ -635,16 +633,18 @@
            - Keep clips short (~5 seconds) and compressed (under 3MB) so the
              page stays fast and doesn't eat the visitor's bandwidth.
            - Use .mp4 (H.264) format — it plays in every modern browser
-             without needing extra fallback files. -->
+             without needing extra fallback files.
+           Photos live in assets/photos/, clips in assets/videos/. Swap the
+           generic alt="Photo" text for a real description of each image. -->
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g1/600/750" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/photos/photo1.jpg" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/photos/photo2.jpg" alt="Photo" loading="lazy"></div>
         <div class="gallery-item"><video src="assets/videos/clip1.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g3/600/680" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/photos/photo3.jpg" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/photos/photo4.jpg" alt="Photo" loading="lazy"></div>
         <div class="gallery-item"><video src="assets/videos/clip2.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g5/600/820" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><video src="assets/videos/clip3.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g7/600/560" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><video src="assets/videos/clip4.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+        <div class="gallery-item"><img src="assets/photos/photo5.jpg" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/photos/photo6.jpg" alt="Photo" loading="lazy"></div>
       </div>
     </section>
 
