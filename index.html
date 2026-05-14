@@ -507,13 +507,19 @@
       background-color: var(--card-bg);
     }
 
-    .gallery-item img {
+    /* Both <img> and <video> share the same look inside a gallery card.
+       Grouping them in one comma-separated selector means we only write
+       the rule once — any future styling (object-fit, filter, etc.) added
+       here will automatically apply to both element types. */
+    .gallery-item img,
+    .gallery-item video {
       width: 100%;
       display: block; /* removes the small gap beneath inline images */
       transition: transform 0.35s ease;
     }
 
-    .gallery-item:hover img {
+    .gallery-item:hover img,
+    .gallery-item:hover video {
       transform: scale(1.04);
     }
   </style>
@@ -621,15 +627,24 @@
       <p class="section-label">Photos</p>
       <!-- Picsum gives random placeholder photos. The seed= keeps them
            consistent — same seed always returns the same image. -->
+      <!-- This grid mixes photos and short autoplay clips. A few rules for
+           the <video> entries:
+           - They MUST have the `muted` attribute — browsers block autoplay
+             for any video that has sound, so muted is what makes autoplay
+             actually work.
+           - Keep clips short (~5 seconds) and compressed (under 3MB) so the
+             page stays fast and doesn't eat the visitor's bandwidth.
+           - Use .mp4 (H.264) format — it plays in every modern browser
+             without needing extra fallback files. -->
       <div class="gallery-grid">
         <div class="gallery-item"><img src="https://picsum.photos/seed/g1/600/750" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g2/600/400" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><video src="assets/videos/clip1.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
         <div class="gallery-item"><img src="https://picsum.photos/seed/g3/600/680" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g4/600/450" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><video src="assets/videos/clip2.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
         <div class="gallery-item"><img src="https://picsum.photos/seed/g5/600/820" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g6/600/370" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><video src="assets/videos/clip3.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
         <div class="gallery-item"><img src="https://picsum.photos/seed/g7/600/560" alt="Photo" loading="lazy"></div>
-        <div class="gallery-item"><img src="https://picsum.photos/seed/g8/600/490" alt="Photo" loading="lazy"></div>
+        <div class="gallery-item"><video src="assets/videos/clip4.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
       </div>
     </section>
 
