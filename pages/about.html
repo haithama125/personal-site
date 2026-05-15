@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Haitham — About</title>
+  <title>Haitham, About</title>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,700&family=Nunito:wght@400;500;600&display=swap"
@@ -453,6 +453,17 @@
       filter: brightness(0);
       opacity: 0.8;
     }
+    /* Letter mark fallback for platforms that don't have a Simple Icons entry.
+       Styled to match the size/feel of the SVG icons on the other social cards. */
+    .social-icon-letter {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: var(--text);
+      opacity: 0.9;
+    }
 
     .social-info .platform {
       display: block;
@@ -534,7 +545,7 @@
         <p class="tagline">
           An engineering student at the University of Virginia, based in
           Washington DC and Seattle. I'm a strong believer in "measure twice,
-          cut once" — that idea drives a lot of my design process and my life
+          cut once," that idea drives a lot of my design process and my life
           philosophy.
         </p>
       </div>
@@ -580,7 +591,7 @@
       <div class="intro-body">
         <p class="section-label">Introduction</p>
         <p>
-          I'm a perpetual learner — someone addicted to growth and progress,
+          I'm a perpetual learner, someone addicted to growth and progress,
           and building is how I best express that. I'm driven by a fear of
           regret and a desire for a legacy. This website aims to give you a
           snapshot of what I hold most valuable and the person I aspire to be.
@@ -605,8 +616,8 @@
         <!-- Left column: experience timeline -->
         <ul class="timeline">
           <li>
-            <p class="timeline-date">May 2025 — present</p>
-            <h3>SDE Intern — Amazon Web Services</h3>
+            <p class="timeline-date">May 2025 to present</p>
+            <h3>SDE Intern, Amazon Web Services</h3>
             <p>
               Working on the Textract team, a machine learning tool that
               extracts text from complex documents using computer vision. I
@@ -615,16 +626,16 @@
             </p>
           </li>
           <li>
-            <p class="timeline-date">Aug 2024 — present</p>
-            <h3>Student — University of Virginia</h3>
+            <p class="timeline-date">Aug 2024 to present</p>
+            <h3>Student, University of Virginia</h3>
             <p>
               Studying Systems Engineering with a minor in Computer Science
               at UVA's School of Engineering.
             </p>
           </li>
           <li>
-            <p class="timeline-date">May 2023 — Aug 2023</p>
-            <h3>Research Intern — NASA SEES</h3>
+            <p class="timeline-date">May 2023 to Aug 2023</p>
+            <h3>Research Intern, NASA SEES</h3>
             <p>
               Built a machine learning model using ResNet-18 that scanned
               satellite imagery and classified land cover types
@@ -712,12 +723,10 @@
           </span>
         </a>
 
-        <!-- Belli doesn't have a Simple Icons entry (it's a small app), so the
-             image below will likely 404. Two options when you're ready:
-             1. Drop a Belli logo SVG into images/ and point src to it
-             2. Remove the <img> and use a text/initial-letter mark instead -->
+        <!-- Belli has no Simple Icons entry, so we use a stylized "B" letter
+             mark instead of an <img> — see .social-icon-letter in the CSS. -->
         <a href="https://belliapp.com/heythumbb" class="social-card" target="_blank" rel="noopener">
-          <span class="social-icon"><img src="https://cdn.simpleicons.org/belli" alt="" /></span>
+          <span class="social-icon social-icon-letter" aria-hidden="true">B</span>
           <span class="social-info">
             <span class="platform">Belli</span>
             <span class="handle">@heythumbb</span>
@@ -755,12 +764,12 @@
 
         <div class="hobby-card">
           <h3>Sports</h3>
-          <p>Watching, playing, commentating — if it has to do with a sport, I'm there.</p>
+          <p>Watching, playing, commentating, if it has to do with a sport, I'm there.</p>
         </div>
 
         <div class="hobby-card">
           <h3>Nature</h3>
-          <p>I love the outdoors. As a kid I went camping, fishing, and hiking — the quiet of a nice scene is very satisfying to me.</p>
+          <p>I love the outdoors. As a kid I went camping, fishing, and hiking. The quiet of a nice scene is very satisfying to me.</p>
         </div>
 
         <div class="hobby-card">
