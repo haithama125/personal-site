@@ -486,9 +486,23 @@
 
     .hobby-card:hover { box-shadow: var(--card-shadow-hover); }
 
-    .hobby-emoji  { font-size: 2.2rem; margin-bottom: 0.6rem; }
     .hobby-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
     .hobby-card p  { font-size: 0.85rem; opacity: 0.75; line-height: 1.55; }
+
+    /* =====================================================================
+       10. CLOSING CTA — single-sentence "get in touch" line at the bottom
+       ===================================================================== */
+
+    .closing-cta {
+      text-align: center;
+      max-width: var(--content-width);
+      margin: 0 auto;
+    }
+
+    .closing-cta p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
   </style>
 </head>
 
@@ -518,8 +532,10 @@
         <p class="section-label">Hello there</p>
         <h1>I'm Haitham.</h1>
         <p class="tagline">
-          [One sentence about who you are — your title, where you're based,
-          and what makes you interesting to talk to or work with.]
+          An engineering student at the University of Virginia, based in
+          Washington DC and Seattle. I'm a strong believer in "measure twice,
+          cut once" — that idea drives a lot of my design process and my life
+          philosophy.
         </p>
       </div>
 
@@ -564,17 +580,16 @@
       <div class="intro-body">
         <p class="section-label">Introduction</p>
         <p>
-          [Who you are — your background, what you've studied or worked on,
-          and what drives you. Two to three sentences is enough for an opener.]
+          I'm a perpetual learner — someone addicted to growth and progress,
+          and building is how I best express that. I'm driven by a fear of
+          regret and a desire for a legacy. This website aims to give you a
+          snapshot of what I hold most valuable and the person I aspire to be.
         </p>
         <p>
-          [Your career goals — what kind of work you want to do and
-          what you bring to the table. This is where hiring managers and
-          collaborators decide if they want to reach out.]
-        </p>
-        <p>
-          [An accomplishment or two you're proud of — a project shipped,
-          something you built from scratch, or a problem you solved.]
+          I currently work at AWS on their Textract team, a machine learning
+          tool that extracts text from complex documents using computer
+          vision. I'm very interested in systems engineering, and
+          particularly in its implications for product management.
         </p>
       </div>
     </section>
@@ -590,19 +605,32 @@
         <!-- Left column: experience timeline -->
         <ul class="timeline">
           <li>
-            <p class="timeline-date">2025 — present</p>
-            <h3>[Current role or project]</h3>
-            <p>What you're doing here and what you're building or learning.</p>
+            <p class="timeline-date">May 2025 — present</p>
+            <h3>SDE Intern — Amazon Web Services</h3>
+            <p>
+              Working on the Textract team, a machine learning tool that
+              extracts text from complex documents using computer vision. I
+              automated lengthy ticket resolution processes to help on-call
+              team members.
+            </p>
           </li>
           <li>
-            <p class="timeline-date">2023 — 2025</p>
-            <h3>[Previous role or degree]</h3>
-            <p>What you did here and why it matters to your story.</p>
+            <p class="timeline-date">Aug 2024 — present</p>
+            <h3>Student — University of Virginia</h3>
+            <p>
+              Studying Systems Engineering with a minor in Computer Science
+              at UVA's School of Engineering.
+            </p>
           </li>
           <li>
-            <p class="timeline-date">2021 — 2023</p>
-            <h3>[Earlier experience]</h3>
-            <p>What you did here and why it matters to your story.</p>
+            <p class="timeline-date">May 2023 — Aug 2023</p>
+            <h3>Research Intern — NASA SEES</h3>
+            <p>
+              Built a machine learning model using ResNet-18 that scanned
+              satellite imagery and classified land cover types
+              automatically. Wrote and published research, one of 200
+              students selected for AGU Bright StaRS.
+            </p>
           </li>
         </ul>
 
@@ -619,7 +647,7 @@
             The "download" attribute tells the browser to save the file
             instead of opening it — so visitors get a downloaded copy.
           -->
-          <a href="../resume.pdf" download class="resume-btn">Download PDF</a>
+          <a href="../resume.pdf" download="HaithamAhmadResume.pdf" class="resume-btn">Download PDF</a>
         </div>
 
       </div>
@@ -638,23 +666,23 @@
              them in plain (brand color) and recolor them via CSS filter
              so they match the current theme (see .social-icon img above).
              alt="" because the platform name next to it already labels the link. -->
-        <a href="https://instagram.com/[your-handle]" class="social-card" target="_blank" rel="noopener">
+        <a href="https://instagram.com/heythumbb" class="social-card" target="_blank" rel="noopener">
           <span class="social-icon"><img src="https://cdn.simpleicons.org/instagram" alt="" /></span>
           <span class="social-info">
             <span class="platform">Instagram</span>
-            <span class="handle">@[your-handle]</span>
+            <span class="handle">@heythumbb</span>
           </span>
         </a>
 
-        <a href="https://tiktok.com/@[your-handle]" class="social-card" target="_blank" rel="noopener">
+        <a href="https://tiktok.com/@heythumbb" class="social-card" target="_blank" rel="noopener">
           <span class="social-icon"><img src="https://cdn.simpleicons.org/tiktok" alt="" /></span>
           <span class="social-info">
             <span class="platform">TikTok</span>
-            <span class="handle">@[your-handle]</span>
+            <span class="handle">@heythumbb</span>
           </span>
         </a>
 
-        <a href="https://linkedin.com/in/[your-handle]" class="social-card" target="_blank" rel="noopener">
+        <a href="https://www.linkedin.com/in/haitham-ahmad/" class="social-card" target="_blank" rel="noopener">
           <!-- Pulled from Iconify (api.iconify.design) instead of Simple Icons:
                the Simple Icons LinkedIn glyph is a solid square that hides
                the "in" cutout once the CSS filter recolors it. fa6-brands'
@@ -664,31 +692,53 @@
           <span class="social-icon"><img src="https://api.iconify.design/fa6-brands:linkedin-in.svg" alt="" /></span>
           <span class="social-info">
             <span class="platform">LinkedIn</span>
-            <span class="handle">/in/[your-handle]</span>
+            <span class="handle">/in/haitham-ahmad</span>
           </span>
         </a>
 
-        <a href="https://github.com/[your-handle]" class="social-card" target="_blank" rel="noopener">
+        <a href="https://github.com/haithama125" class="social-card" target="_blank" rel="noopener">
           <span class="social-icon"><img src="https://cdn.simpleicons.org/github" alt="" /></span>
           <span class="social-info">
             <span class="platform">GitHub</span>
-            <span class="handle">@[your-handle]</span>
+            <span class="handle">@haithama125</span>
           </span>
         </a>
 
-        <a href="https://x.com/[your-handle]" class="social-card" target="_blank" rel="noopener">
+        <a href="https://letterboxd.com/heythumbb" class="social-card" target="_blank" rel="noopener">
+          <span class="social-icon"><img src="https://cdn.simpleicons.org/letterboxd" alt="" /></span>
+          <span class="social-info">
+            <span class="platform">Letterboxd</span>
+            <span class="handle">@heythumbb</span>
+          </span>
+        </a>
+
+        <!-- Belli doesn't have a Simple Icons entry (it's a small app), so the
+             image below will likely 404. Two options when you're ready:
+             1. Drop a Belli logo SVG into images/ and point src to it
+             2. Remove the <img> and use a text/initial-letter mark instead -->
+        <a href="https://belliapp.com/heythumbb" class="social-card" target="_blank" rel="noopener">
+          <span class="social-icon"><img src="https://cdn.simpleicons.org/belli" alt="" /></span>
+          <span class="social-info">
+            <span class="platform">Belli</span>
+            <span class="handle">@heythumbb</span>
+          </span>
+        </a>
+
+        <!-- X / Twitter isn't set up yet, so this card is a plain <div>
+             instead of a link — nothing to point it at for now. -->
+        <div class="social-card">
           <span class="social-icon"><img src="https://cdn.simpleicons.org/x" alt="" /></span>
           <span class="social-info">
             <span class="platform">X / Twitter</span>
-            <span class="handle">@[your-handle]</span>
+            <span class="handle">Not set up yet</span>
           </span>
-        </a>
+        </div>
 
-        <a href="mailto:you@example.com" class="social-card">
+        <a href="mailto:haithama125@gmail.com" class="social-card">
           <span class="social-icon"><img src="https://cdn.simpleicons.org/gmail" alt="" /></span>
           <span class="social-info">
             <span class="platform">Email</span>
-            <span class="handle">you@example.com</span>
+            <span class="handle">haithama125@gmail.com</span>
           </span>
         </a>
 
@@ -703,32 +753,39 @@
       <p class="section-label">Outside of work</p>
       <div class="hobbies-grid">
 
-        <!-- Replace the emoji and text with your real hobbies -->
         <div class="hobby-card">
-          <div class="hobby-emoji">🎸</div>
-          <h3>[Hobby one]</h3>
-          <p>A sentence about what you enjoy about this.</p>
+          <h3>Sports</h3>
+          <p>Watching, playing, commentating — if it has to do with a sport, I'm there.</p>
         </div>
 
         <div class="hobby-card">
-          <div class="hobby-emoji">📷</div>
-          <h3>[Hobby two]</h3>
-          <p>A sentence about what you enjoy about this.</p>
+          <h3>Nature</h3>
+          <p>I love the outdoors. As a kid I went camping, fishing, and hiking — the quiet of a nice scene is very satisfying to me.</p>
         </div>
 
         <div class="hobby-card">
-          <div class="hobby-emoji">🏔️</div>
-          <h3>[Hobby three]</h3>
-          <p>A sentence about what you enjoy about this.</p>
+          <h3>Eating</h3>
+          <p>I'd consider myself a foodie. Follow me on Belli to see what I'm eating.</p>
         </div>
 
         <div class="hobby-card">
-          <div class="hobby-emoji">📚</div>
-          <h3>[Hobby four]</h3>
-          <p>A sentence about what you enjoy about this.</p>
+          <h3>Building</h3>
+          <p>I like making little side projects and releasing them into the world.</p>
         </div>
 
       </div>
+    </section>
+
+
+    <!-- ==============================================================
+         CLOSING CTA — one-sentence "get in touch" prompt
+         ============================================================== -->
+    <section class="closing-cta">
+      <p class="section-label">Get in touch</p>
+      <p>
+        Got a project, a question, or just want to chat? Shoot me an email at
+        <a href="mailto:haithama125@gmail.com">haithama125@gmail.com</a>.
+      </p>
     </section>
 
   </main>

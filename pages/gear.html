@@ -256,6 +256,33 @@
       display: block;
     }
 
+    /* ---- SOFTWARE LOGO VARIANT ----
+       Used by the Software section so every card shows a single-color
+       brand glyph centered on the same flat background — gives the row
+       a uniform look instead of mixing different product photo styles.
+       The SVGs come from cdn.simpleicons.org (a free brand-icon CDN);
+       the CSS filter recolors them to match the current theme:
+         - brightness(0) crushes the icon to pure black
+         - invert(1) flips that to white for dark mode (dropped in light mode) */
+    .gear-icon-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg);
+    }
+    .gear-icon-logo img {
+      width: auto;
+      height: 70px;
+      max-width: 70px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.92;
+    }
+    [data-theme="light"] .gear-icon-logo img {
+      filter: brightness(0);
+      opacity: 0.82;
+    }
+
     /* The card no longer has uniform padding, so each text element below
        the image gets its own horizontal padding (1.5rem on each side).
        The > combinator scopes these rules to direct children of .gear-card
@@ -400,59 +427,24 @@
 
 
     <!-- ==============================================================
-         COMPUTING
+         WORKSPACE
          ============================================================== -->
     <section>
-      <p class="section-label">Computing</p>
+      <p class="section-label">Workspace</p>
       <div class="gear-grid">
 
-        <!-- Featured item spans full width — good for your main machine -->
+        <!-- Featured item spans full width — main machine -->
         <div class="gear-featured">
           <div class="gear-featured-icon">
-            <img src="../images/gear/computer.jpg" alt="My computer" />
+            <img src="../images/gear/macbook-air.webp" alt="MacBook Air" />
           </div>
           <div class="gear-featured-body">
-            <h3>[Your Computer]</h3>
-            <p class="gear-model">[e.g. MacBook Pro 14" M3, 2024]</p>
-            <p>
-              [What you love about it and how you use it every day.
-              One or two sentences is enough — be specific about what
-              you reach for it for.]
-            </p>
+            <h3>MacBook Air</h3>
+            <p class="gear-model">15" · M2 · Midnight Blue</p>
             <div class="gear-tags">
               <span class="tag">Daily driver</span>
             </div>
           </div>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/monitor.jpg" alt="Monitor" />
-          </div>
-          <h3>[Monitor]</h3>
-          <p class="gear-model">[e.g. LG 27UK850-W 4K]</p>
-          <p>[Why you picked this one and what you use it for.]</p>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/keyboard.jpg" alt="Keyboard" />
-          </div>
-          <h3>[Keyboard]</h3>
-          <p class="gear-model">[e.g. Keychron Q1 Pro]</p>
-          <p>[What switch, what you like about the typing feel, etc.]</p>
-          <div class="gear-tags">
-            <span class="tag">Favourite</span>
-          </div>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/mouse.jpg" alt="Mouse or trackpad" />
-          </div>
-          <h3>[Mouse or Trackpad]</h3>
-          <p class="gear-model">[e.g. Logitech MX Master 3]</p>
-          <p>[Why you prefer this over the default, what makes it worth it.]</p>
         </div>
 
       </div>
@@ -468,32 +460,18 @@
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/headphones.jpg" alt="Headphones" />
+            <img src="../images/gear/airpods-pro.jpg" alt="AirPods Pro" />
           </div>
-          <h3>[Headphones]</h3>
-          <p class="gear-model">[e.g. Sony WH-1000XM5]</p>
-          <p>[What you use them for — music, calls, focus — and what stands out.]</p>
-          <div class="gear-tags">
-            <span class="tag">Favourite</span>
-          </div>
+          <h3>AirPods Pro</h3>
+          <p class="gear-model">In-ear · Noise cancelling</p>
         </div>
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/microphone.jpg" alt="Microphone" />
+            <img src="../images/gear/airpods-max.jpg" alt="AirPods Max" />
           </div>
-          <h3>[Microphone]</h3>
-          <p class="gear-model">[e.g. Blue Yeti Nano]</p>
-          <p>[When and why you use this — calls, recording, streaming.]</p>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/speakers.jpg" alt="Speakers" />
-          </div>
-          <h3>[Speakers]</h3>
-          <p class="gear-model">[e.g. Audioengine A2+]</p>
-          <p>[What music you listen to on them and what the sound is like.]</p>
+          <h3>AirPods Max</h3>
+          <p class="gear-model">Over-ear · Sky Blue</p>
         </div>
 
       </div>
@@ -501,7 +479,7 @@
 
 
     <!-- ==============================================================
-         CAMERA / PHOTO
+         CAMERA
          ============================================================== -->
     <section>
       <p class="section-label">Camera</p>
@@ -509,37 +487,12 @@
 
         <div class="gear-featured">
           <div class="gear-featured-icon">
-            <img src="../images/gear/camera.jpg" alt="My camera" />
+            <img src="../images/gear/sony-zv1.webp" alt="Sony ZV-1" />
           </div>
           <div class="gear-featured-body">
-            <h3>[Your Camera]</h3>
-            <p class="gear-model">[e.g. Sony A7C II]</p>
-            <p>
-              [What you shoot with it, why you chose this body,
-              and what you're still learning.]
-            </p>
+            <h3>Sony ZV-1</h3>
+            <p class="gear-model">Compact · Vlog camera</p>
           </div>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/lens.jpg" alt="Camera lens" />
-          </div>
-          <h3>[Lens]</h3>
-          <p class="gear-model">[e.g. Sony 35mm f/1.8]</p>
-          <p>[When you reach for it and what you love about it.]</p>
-          <div class="gear-tags">
-            <span class="tag">Favourite</span>
-          </div>
-        </div>
-
-        <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/camera-bag.jpg" alt="Camera bag" />
-          </div>
-          <h3>[Camera Bag]</h3>
-          <p class="gear-model">[e.g. Peak Design Everyday Backpack]</p>
-          <p>[Why this bag over everything else you tried.]</p>
         </div>
 
       </div>
@@ -553,40 +506,64 @@
       <p class="section-label">Software</p>
       <div class="gear-grid">
 
+        <!-- Software cards use brand SVGs from cdn.simpleicons.org with the
+             gear-icon-logo class so every logo is centered, single-color,
+             and the same size — keeps the row visually uniform. -->
         <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/code-editor.jpg" alt="Code editor" />
+          <div class="gear-icon gear-icon-logo">
+            <!-- Simple Icons doesn't host the VS Code mark (Microsoft trademark
+                 reasons), so this one is pulled from Iconify's Material Design
+                 Icons set instead. Same single-color SVG, recolored by CSS. -->
+            <img src="https://api.iconify.design/mdi:microsoft-visual-studio-code.svg" alt="VS Code" />
           </div>
-          <h3>[Code Editor]</h3>
-          <p class="gear-model">[e.g. VS Code]</p>
-          <p>[Theme, extensions, or anything you've customised that changed how you work.]</p>
+          <h3>VS Code</h3>
+          <p class="gear-model">Code editor</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/notes.jpg" alt="Notes app" />
+          <div class="gear-icon gear-icon-logo">
+            <img src="https://cdn.simpleicons.org/claude" alt="Claude Code" />
           </div>
-          <h3>[Notes App]</h3>
-          <p class="gear-model">[e.g. Obsidian]</p>
-          <p>[How you organise your notes and why this app fits your brain.]</p>
+          <h3>Claude Code</h3>
+          <p class="gear-model">AI pair programmer</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/tasks.jpg" alt="Task manager" />
+          <div class="gear-icon gear-icon-logo">
+            <img src="https://cdn.simpleicons.org/obsidian" alt="Obsidian" />
           </div>
-          <h3>[Task Manager]</h3>
-          <p class="gear-model">[e.g. Notion / Todoist / pen + paper]</p>
-          <p>[Your system for keeping track of what needs to get done.]</p>
+          <h3>Obsidian</h3>
+          <p class="gear-model">Notes &amp; knowledge base</p>
         </div>
 
         <div class="gear-card">
-          <div class="gear-icon">
-            <img src="../images/gear/browser.jpg" alt="Web browser" />
+          <div class="gear-icon gear-icon-logo">
+            <img src="https://cdn.simpleicons.org/brave" alt="Brave Browser" />
           </div>
-          <h3>[Browser]</h3>
-          <p class="gear-model">[e.g. Arc / Firefox / Chrome]</p>
-          <p>[Any extensions or habits that make your browsing setup work for you.]</p>
+          <h3>Brave Browser</h3>
+          <p class="gear-model">Web browser</p>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-icon gear-icon-logo">
+            <!-- Simple Icons doesn't have AutoCAD specifically, so this pulls
+                 the Autodesk parent-brand glyph from Iconify (the closest
+                 available match in the same single-color style). -->
+            <img src="https://api.iconify.design/simple-icons:autodesk.svg" alt="AutoCAD" />
+          </div>
+          <h3>AutoCAD</h3>
+          <p class="gear-model">CAD &amp; drafting</p>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-icon gear-icon-logo">
+            <!-- SQL isn't a product so it has no single official logo; the
+                 MySQL dolphin is the most widely-recognized SQL mark and
+                 reads cleanly when recolored to a single tone. -->
+            <img src="https://api.iconify.design/simple-icons:mysql.svg" alt="SQL" />
+          </div>
+          <h3>SQL</h3>
+          <p class="gear-model">Databases &amp; queries</p>
         </div>
 
       </div>
@@ -594,46 +571,42 @@
 
 
     <!-- ==============================================================
-         DESK & EVERYDAY CARRY
+         EVERYDAY CARRY
          ============================================================== -->
     <section>
-      <p class="section-label">Desk & everyday carry</p>
+      <p class="section-label">Everyday carry</p>
       <div class="gear-grid">
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/chair.jpg" alt="Chair" />
+            <img src="../images/gear/iphone-13-pro-max.jpg" alt="iPhone 13 Pro Max" />
           </div>
-          <h3>[Chair]</h3>
-          <p class="gear-model">[e.g. Herman Miller Aeron]</p>
-          <p>[Whether it was worth the price and what problem it solved.]</p>
+          <h3>iPhone 13 Pro Max</h3>
+          <p class="gear-model">Forest Green</p>
         </div>
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/desk-light.jpg" alt="Desk light" />
+            <img src="../images/gear/carhartt-wallet.webp" alt="Carhartt wallet" />
           </div>
-          <h3>[Desk Light]</h3>
-          <p class="gear-model">[e.g. BenQ ScreenBar]</p>
-          <p>[Why good lighting matters to you and how this fits in.]</p>
+          <h3>Carhartt Wallet</h3>
+          <p class="gear-model">Bifold</p>
         </div>
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/bag.jpg" alt="Bag" />
+            <img src="../images/gear/airpods-pro.jpg" alt="AirPods Pro" />
           </div>
-          <h3>[Bag]</h3>
-          <p class="gear-model">[e.g. Aer Day Pack]</p>
-          <p>[What you carry in it and where it goes with you.]</p>
+          <h3>AirPods Pro</h3>
+          <p class="gear-model">In-ear · Noise cancelling</p>
         </div>
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/notebook.jpg" alt="Notebook" />
+            <img src="../images/gear/nominal-watch.webp" alt="Nominal Neptune watch" />
           </div>
-          <h3>[Notebook]</h3>
-          <p class="gear-model">[e.g. Leuchtturm1917 A5]</p>
-          <p>[What you write in it and whether you're a grid, ruled, or dot-grid person.]</p>
+          <h3>Nominal Neptune</h3>
+          <p class="gear-model">Arabic Numerals</p>
         </div>
 
       </div>
@@ -652,11 +625,10 @@
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/wanted-camera.jpg" alt="Wishlist camera" />
+            <img src="../images/gear/wanted-daytona.webp" alt="Rolex Daytona" />
           </div>
-          <h3>[Wanted item]</h3>
-          <p class="gear-model">[e.g. Fujifilm X100VI]</p>
-          <p>[Why you want it and what you'd use it for.]</p>
+          <h3>Rolex Daytona</h3>
+          <p class="gear-model">Watch</p>
           <div class="gear-tags">
             <span class="tag">Wishlist</span>
           </div>
@@ -664,11 +636,10 @@
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/wanted-headphones.jpg" alt="Wishlist headphones" />
+            <img src="../images/gear/wanted-raptor.webp" alt="Ford F-150 Raptor" />
           </div>
-          <h3>[Wanted item]</h3>
-          <p class="gear-model">[e.g. Sennheiser HD 600]</p>
-          <p>[What draws you to it.]</p>
+          <h3>Ford Raptor</h3>
+          <p class="gear-model">Truck</p>
           <div class="gear-tags">
             <span class="tag">Wishlist</span>
           </div>
@@ -676,11 +647,43 @@
 
         <div class="gear-card">
           <div class="gear-icon">
-            <img src="../images/gear/wanted-watch.jpg" alt="Wishlist watch" />
+            <img src="../images/gear/wanted-marshall.webp" alt="Marshall speakers" />
           </div>
-          <h3>[Wanted item]</h3>
-          <p class="gear-model">[e.g. Seiko SPB143]</p>
-          <p>[Why this one made the list.]</p>
+          <h3>Marshall Speakers</h3>
+          <p class="gear-model">Bookshelf / portable</p>
+          <div class="gear-tags">
+            <span class="tag">Wishlist</span>
+          </div>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-ninja-650.webp" alt="Kawasaki Ninja 650" />
+          </div>
+          <h3>Kawasaki Ninja 650</h3>
+          <p class="gear-model">Motorcycle</p>
+          <div class="gear-tags">
+            <span class="tag">Wishlist</span>
+          </div>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-santos.webp" alt="Cartier Santos" />
+          </div>
+          <h3>Cartier Santos</h3>
+          <p class="gear-model">Watch</p>
+          <div class="gear-tags">
+            <span class="tag">Wishlist</span>
+          </div>
+        </div>
+
+        <div class="gear-card">
+          <div class="gear-icon">
+            <img src="../images/gear/wanted-macbook-pro.jpg" alt="MacBook Pro 16 M5 Pro" />
+          </div>
+          <h3>MacBook Pro 16"</h3>
+          <p class="gear-model">M5 Pro</p>
           <div class="gear-tags">
             <span class="tag">Wishlist</span>
           </div>

@@ -185,6 +185,18 @@
 
     section { margin-bottom: 5rem; }
 
+    /* The first <main> on this page only holds the page-hero, and it sits
+       directly above the stats strip. The default 4rem main padding +
+       5rem section margin leaves a big empty gap between the heading and
+       the ribbon — these overrides tighten that transition. */
+    main:first-of-type { padding-bottom: 2rem; }
+    .page-hero { margin-bottom: 0; }
+
+    /* Same idea for the bottom of the strip → top of the next <main>:
+       drop the strip's bottom margin and trim the trailing main's top
+       padding so "Favourite trips" sits closer to the ribbon. */
+    .stats-strip + main { padding-top: 2rem; }
+
     .section-label {
       font-size: 0.78rem; font-weight: 600;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -222,7 +234,7 @@
       margin-left:  calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
       width: 100vw;
-      margin-bottom: 4rem;
+      margin-bottom: 0;
       padding: 2rem 0;
       display: flex;
       justify-content: center;
@@ -476,9 +488,7 @@
       <p class="section-label">Places I've been</p>
       <h1>Travel.</h1>
       <p>
-        I think the best way to learn about the world — and yourself —
-        is to leave home. Here's where I've been so far,
-        and where I'm going next.
+        The goal is a full passport by the next time I have to renew it.
       </p>
     </section>
 
@@ -491,15 +501,15 @@
       The JavaScript below reads data-count and animates them up from zero.
     -->
     <div class="stat">
-      <div class="stat-number" data-count="0">0</div>
+      <div class="stat-number" data-count="8">0</div>
       <div class="stat-label">Countries</div>
     </div>
     <div class="stat">
-      <div class="stat-number" data-count="0">0</div>
+      <div class="stat-number" data-count="22">0</div>
       <div class="stat-label">Cities</div>
     </div>
     <div class="stat">
-      <div class="stat-number" data-count="0">0</div>
+      <div class="stat-number" data-count="31">0</div>
       <div class="stat-label">Trips</div>
     </div>
   </div>
@@ -513,72 +523,55 @@
       <p class="section-label">Favourite trips</p>
       <div class="trips-grid">
 
-        <!-- Featured trip — replace the picsum seed and text with a real trip -->
+        <!-- Featured trip — Morocco. Uses a <video> instead of an <img>;
+             the browser autoplays muted/looping clips inline (muted is
+             required for autoplay; playsinline keeps it in the card on iOS
+             instead of going fullscreen). object-fit: cover from the
+             .trip-photo rule applies to videos too, so it fills the card. -->
         <div class="trip-featured">
-          <img
+          <video
             class="trip-photo"
-            src="https://picsum.photos/seed/travel-feat/800/600"
-            alt="[Destination name]"
-            loading="lazy"
-          />
+            src="../assets/videos/morocco.mp4"
+            autoplay muted loop playsinline preload="metadata"
+          ></video>
           <div class="trip-body">
-            <div class="trip-meta">
-              <span class="trip-date">[Month Year]</span>
-            </div>
-            <h3>[City or Region, Country]</h3>
-            <p>
-              [Two or three sentences about this trip — what made it special,
-              a favourite memory, or something that surprised you.]
-            </p>
-          </div>
-        </div>
-
-        <!-- Regular trip cards — duplicate as many as you need -->
-        <div class="trip-card">
-          <img
-            class="trip-photo"
-            src="https://picsum.photos/seed/travel-1/600/400"
-            alt="[Destination name]"
-            loading="lazy"
-          />
-          <div class="trip-body">
-            <div class="trip-meta">
-              <span class="trip-date">[Month Year]</span>
-            </div>
-            <h3>[City, Country]</h3>
-            <p>[What you loved about this place in a sentence or two.]</p>
+            <h3>Morocco</h3>
           </div>
         </div>
 
         <div class="trip-card">
           <img
             class="trip-photo"
-            src="https://picsum.photos/seed/travel-2/600/400"
-            alt="[Destination name]"
+            src="../images/travel/seattle.jpg"
+            alt="Seattle"
             loading="lazy"
           />
           <div class="trip-body">
-            <div class="trip-meta">
-              <span class="trip-date">[Month Year]</span>
-            </div>
-            <h3>[City, Country]</h3>
-            <p>[What you loved about this place in a sentence or two.]</p>
+            <h3>Seattle, USA</h3>
           </div>
         </div>
 
         <div class="trip-card">
           <img
             class="trip-photo"
-            src="https://picsum.photos/seed/travel-3/600/400"
-            alt="[Destination name]"
+            src="../images/travel/colombia.jpg"
+            alt="Colombia"
             loading="lazy"
           />
           <div class="trip-body">
-            <div class="trip-meta">
-              <span class="trip-date">[Month Year]</span>
-            </div>
-            <h3>[City, Country]</h3>
-            <p>[What you loved about this place in a sentence or two.]</p>
+            <h3>Colombia</h3>
+          </div>
+        </div>
+
+        <div class="trip-card">
+          <img
+            class="trip-photo"
+            src="../images/travel/los-angeles.jpg"
+            alt="Los Angeles"
+            loading="lazy"
+          />
+          <div class="trip-body">
+            <h3>Los Angeles, USA</h3>
           </div>
         </div>
 
@@ -593,15 +586,18 @@
       <p class="section-label">Countries visited</p>
       <div class="countries-scroll">
         <!--
-          Each pill is one country. Replace the flag emoji and name.
-          You can find flag emojis by searching "flag emoji [country name]".
+          Each pill is one country. The flag emojis are real Unicode
+          regional-indicator pairs — they render as the country's flag
+          on most modern systems.
         -->
-        <div class="country-pill">[Country]</div>
-        <div class="country-pill">[Country]</div>
-        <div class="country-pill">[Country]</div>
-        <div class="country-pill">[Country]</div>
-        <div class="country-pill">[Country]</div>
-        <div class="country-pill">[Country]</div>
+        <div class="country-pill">🇱🇧 Lebanon</div>
+        <div class="country-pill">🇺🇸 USA</div>
+        <div class="country-pill">🇶🇦 Qatar</div>
+        <div class="country-pill">🇯🇴 Jordan</div>
+        <div class="country-pill">🇵🇸 Palestine</div>
+        <div class="country-pill">🇨🇴 Colombia</div>
+        <div class="country-pill">🇨🇦 Canada</div>
+        <div class="country-pill">🇲🇦 Morocco</div>
       </div>
     </section>
 
@@ -616,40 +612,35 @@
         <li class="bucket-item">
           <div class="bucket-num">1</div>
           <div class="bucket-text">
-            <h3>[Destination]</h3>
-            <p>[Why this place is calling you — what you want to see or do there.]</p>
+            <h3>🇪🇸 Spain</h3>
           </div>
         </li>
 
         <li class="bucket-item">
           <div class="bucket-num">2</div>
           <div class="bucket-text">
-            <h3>[Destination]</h3>
-            <p>[Why this place is calling you — what you want to see or do there.]</p>
+            <h3>🇮🇹 Italy</h3>
           </div>
         </li>
 
         <li class="bucket-item">
           <div class="bucket-num">3</div>
           <div class="bucket-text">
-            <h3>[Destination]</h3>
-            <p>[Why this place is calling you — what you want to see or do there.]</p>
+            <h3>🇯🇵 Japan</h3>
           </div>
         </li>
 
         <li class="bucket-item">
           <div class="bucket-num">4</div>
           <div class="bucket-text">
-            <h3>[Destination]</h3>
-            <p>[Why this place is calling you — what you want to see or do there.]</p>
+            <h3>🇸🇬 Singapore</h3>
           </div>
         </li>
 
         <li class="bucket-item">
           <div class="bucket-num">5</div>
           <div class="bucket-text">
-            <h3>[Destination]</h3>
-            <p>[Why this place is calling you — what you want to see or do there.]</p>
+            <h3>🇴🇲 Oman</h3>
           </div>
         </li>
 
