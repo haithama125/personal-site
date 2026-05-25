@@ -416,6 +416,19 @@
       box-shadow: var(--card-shadow-hover);
     }
 
+    /* When the entire card is wrapped in an <a> (whole-card link variant),
+       reset the anchor's default styling so it looks identical to a regular
+       card — but the whole rectangle is now clickable. */
+    a.project-card {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    a.project-card:hover h3 {
+      color: var(--accent);
+    }
+
     .project-card h3 {
       font-size: 1.1rem;
       margin-bottom: 0.4rem;
@@ -620,6 +633,20 @@
           <span class="live-label">Currently working on:</span>
           <span class="live-project">Live oil &amp; gas price dashboard</span>
         </div>
+
+        <!-- Whole-card link: wrapping the card in an <a> makes the entire
+             rectangle clickable, not just the title. target="_blank" opens
+             the dashboard in a new tab; rel="noopener" is a small security
+             best-practice (see the resume link in the intro for the same). -->
+        <a class="project-card" href="https://haithama125.github.io/gas-prices/" target="_blank" rel="noopener">
+          <h3>Gas prices dashboard</h3>
+          <p>A live dashboard showing gas prices from countries around the world alongside the news stories driving them — built to make global energy markets easier to glance at.</p>
+          <div class="project-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">APIs</span>
+          </div>
+        </a>
 
         <div class="project-card">
           <h3><a href="#">Ticketing resolution process for AWS</a></h3>
